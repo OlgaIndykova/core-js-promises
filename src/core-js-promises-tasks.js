@@ -111,12 +111,7 @@ function getAllOrNothing(promises) {
  */
 function getAllResult(promises) {
   return Promise.all(
-    promises.map((promise) => {
-      return new Promise((resolve, reject) => {
-        reject(new Error(null));
-        resolve(promise);
-      });
-    })
+    promises.map((promise) => promise.then((value) => value).catch(() => null))
   );
 }
 
